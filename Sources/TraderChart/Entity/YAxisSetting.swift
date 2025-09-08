@@ -9,7 +9,7 @@
 import Foundation
 
 /// 全グラフエリアのY軸共通の設定
-public class YAxisSetting {
+public struct YAxisSetting {
     /// Y軸の左右位置
     public var alignment = YAxisAlignment.right
     /// Y軸の幅

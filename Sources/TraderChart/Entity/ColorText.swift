@@ -9,7 +9,7 @@
 import UIKit
 
 /// 色指定されたテキスト。主に凡例の位置項目を表現するのに使う
-public class ColorText {
+public struct ColorText {
     /// テキスト
     public let text: String
     /// 色

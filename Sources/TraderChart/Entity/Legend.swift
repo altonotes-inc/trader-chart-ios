@@ -9,7 +9,7 @@
 import Foundation
 
 /// 凡例
-public class Legend {
+public struct Legend {
     /// 凡例の行
     public var lines: [[ColorText]] = []
 

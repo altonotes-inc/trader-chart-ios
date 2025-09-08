@@ -9,7 +9,7 @@
 import UIKit
 
 /// チャートの色設定。JSONの設定ファイルから作成できる
-public final class ColorConfig: @unchecked Sendable {
+public struct ColorConfig: Sendable {
     
     var dictionary: [String: UIColor?] = [:]
 
@@ -24,7 +24,7 @@ public final class ColorConfig: @unchecked Sendable {
         parseJson(json)
     }
     
-    private func parseJson(_ json: [String: Any], parentKey: String = "") {
+    private mutating func parseJson(_ json: [String: Any], parentKey: String = "") {
         json.forEach { key, value in
             if let argbHex = value as? String, argbHex.isNotEmpty {
                 dictionary[parentKey + key] = UIColor(argbHex: argbHex)
