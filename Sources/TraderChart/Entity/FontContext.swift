@@ -9,7 +9,7 @@
 import UIKit
 
 /// 共通のフォントを決定する
-public protocol FontContext {
+public protocol FontContext: Sendable {
     func numericFont(size: CGFloat) -> UIFont
     func descriptionFont(size: CGFloat) -> UIFont
 }
@@ -20,7 +20,7 @@ public protocol UsesFontContext {
 }
 
 /// 標準のFontContext
-public class DefaultFontContext: FontContext {
+public final class DefaultFontContext: FontContext {
     public func numericFont(size: CGFloat) -> UIFont {
         return UIFont.systemFont(ofSize: size)
     }

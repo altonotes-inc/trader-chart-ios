@@ -17,7 +17,7 @@ import Foundation
 ///    - iOSはマイナスのスクロールオフセットを指定した際に、scrollViewDidScrollが不正に呼ばれるバグらしき挙動がある
 ///    - Androidはスクロールコンテンツのサイズを数値で指定できずサイズ制御が煩雑
 ///
-open class Scroller {
+open class Scroller: @unchecked Sendable {
     private let halfPI: Double = Double.pi / 2
     private let pi: Double = Double.pi
 

@@ -509,26 +509,30 @@ open class ChartView: UIView, ColorConfigurable, UsesFontContext {
 
     /// 色設定を反映する
     /// ※ xAxis、yAxis、separator、borderなどを差し替える場合、差し替え後のインスタンスに設定は反映されない
-    public func reflectColorConfig(_ colorConfig: ColorConfig) {
-        backgroundColor = colorConfig["background"] ?? backgroundColor
-        chartBackgroundColor = colorConfig["chart_background"] ?? chartBackgroundColor
-        graphBackgroundColor = colorConfig["graph_background"] ?? graphBackgroundColor
-        loadingIndicatorView.color = colorConfig["loading_indicator"] ?? loadingIndicatorView.color
-        
-        separator.reflectColorConfig(colorConfig)
-        border.reflectColorConfig(colorConfig)
-        xAxis.reflectColorConfig(colorConfig)
-        graphAreas.forEach {
-            $0.reflectColorConfig(colorConfig)
+    nonisolated public func reflectColorConfig(_ colorConfig: ColorConfig) {
+        Task { @MainActor in
+            backgroundColor = colorConfig["background"] ?? backgroundColor
+            chartBackgroundColor = colorConfig["chart_background"] ?? chartBackgroundColor
+            graphBackgroundColor = colorConfig["graph_background"] ?? graphBackgroundColor
+            loadingIndicatorView.color = colorConfig["loading_indicator"] ?? loadingIndicatorView.color
+            
+            separator.reflectColorConfig(colorConfig)
+            border.reflectColorConfig(colorConfig)
+            xAxis.reflectColorConfig(colorConfig)
+            graphAreas.forEach {
+                $0.reflectColorConfig(colorConfig)
+            }
         }
     }
 
     /// フォント設定を反映する
     /// ※ xAxis、yAxis、separator、borderなどを差し替える場合、差し替え後のインスタンスに設定は反映されない
-    public func reflectFontContext(_ fontContext: FontContext) {
-        xAxis.reflectFontContext(fontContext)
-        graphAreas.forEach {
-            $0.reflectFontContext(fontContext)
+    nonisolated public func reflectFontContext(_ fontContext: FontContext) {
+        Task { @MainActor in
+            xAxis.reflectFontContext(fontContext)
+            graphAreas.forEach {
+                $0.reflectFontContext(fontContext)
+            }
         }
     }
 

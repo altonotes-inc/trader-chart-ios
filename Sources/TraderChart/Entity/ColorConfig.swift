@@ -9,7 +9,7 @@
 import UIKit
 
 /// チャートの色設定。JSONの設定ファイルから作成できる
-open class ColorConfig {
+public final class ColorConfig: @unchecked Sendable {
     
     var dictionary: [String: UIColor?] = [:]
 
@@ -35,7 +35,7 @@ open class ColorConfig {
     }
 
     /// 引数のキーに紐づく色を取得する
-    open subscript(key: String) -> UIColor? {
+    public subscript(key: String) -> UIColor? {
         return dictionary[key] ?? nil
     }
 }
