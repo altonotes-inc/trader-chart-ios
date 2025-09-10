@@ -34,9 +34,14 @@ public struct ColorConfig: Sendable {
         }
     }
 
-    /// 引数のキーに紐づく色を取得する
+    /// 引数のキーに紐づく色を取得・設定する
     public subscript(key: String) -> UIColor? {
-        return dictionary[key] ?? nil
+        get {
+            return dictionary[key] ?? nil
+        }
+        set {
+            dictionary[key] = newValue
+        }
     }
 }
 
