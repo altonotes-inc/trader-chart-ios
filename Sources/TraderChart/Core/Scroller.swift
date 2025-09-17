@@ -26,6 +26,9 @@ open class Scroller: @unchecked Sendable {
     /// 最大スクロール位置
     public var maxPosition: Double = 1000 // 1000は適当。特に意味はない
 
+    /// 最大慣性スクロール速度
+    public var maxVelocity: Double = 3000
+
     /// FPS（1秒間の処理回数）
     public var fps: Double {
         didSet { loopIntervalMicroSec = fpsToInterval(fps: fps) }
@@ -99,6 +102,7 @@ open class Scroller: @unchecked Sendable {
     /// iPhoneX: 0.2ms〜25ms、iPhone5: 6ms〜18ms
     public func touch(position: CGFloat) { touch(position: Double(position)) }
     public func touch(position: Double) {
+        print("touch")
         moveMode = nil
         isThreadRunning = false
 
@@ -138,10 +142,14 @@ open class Scroller: @unchecked Sendable {
             move *= moveRateOnSink
         }
 
+        var velocity = move / time
+        velocity = min(velocity, maxVelocity)
+        velocity = max(velocity, -maxVelocity)
+
         // 速度計算
         basePoint = BasePoint(time: currentSec(),
                               position: scrollPosition,
-                              velocity: move / time)
+                              velocity: velocity)
 
         if scrollPosition < minPosition {
             moveMode = MoveMode.sinkLower
