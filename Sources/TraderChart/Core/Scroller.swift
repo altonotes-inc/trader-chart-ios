@@ -102,7 +102,6 @@ open class Scroller: @unchecked Sendable {
     /// iPhoneX: 0.2ms〜25ms、iPhone5: 6ms〜18ms
     public func touch(position: CGFloat) { touch(position: Double(position)) }
     public func touch(position: Double) {
-        print("touch")
         moveMode = nil
         isThreadRunning = false
 
